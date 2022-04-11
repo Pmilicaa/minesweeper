@@ -1,30 +1,25 @@
-import React, { useEffect } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import { WebSocketClient } from './services/socket/WebSocketClient';
+import React, { useEffect } from "react";
+import "./App.css";
+import { useAppDispatch } from "./common/hooks";
+import { createGame, initialiazeGame } from "./game/gameSlice";
 
 function App() {
+  const dispatch = useAppDispatch();
 
-  useEffect(()=>{
-   const socket : any= WebSocketClient.createConnection();
-   console.log(socket)
-  })
+  useEffect(() => {
+    dispatch(initialiazeGame());
+  }, []);
+
+  const startGame = (difficulty: number) => {
+    dispatch(createGame(`new ${difficulty}`));
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <button onClick={() => startGame(1)}>Beginner</button>
+      <button onClick={() => startGame(1)}>Intermediate</button>
+      <button onClick={() => startGame(1)}>Hard</button>
+      <button onClick={() => startGame(1)}>Expert</button>
     </div>
   );
 }
