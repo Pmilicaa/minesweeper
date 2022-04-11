@@ -32,6 +32,10 @@ export function* handleInitializeGame(): any {
       if (data.includes("new:")) {
         yield fork(getMap, socket);
       }
+      if (data.includes("open:")) {
+        yield put(editMessage(data.split("open: ")[1]));
+        yield fork(getMap, socket);
+      }
     } catch (err) {
       console.error("socket error:", err);
       socketChannel.close();

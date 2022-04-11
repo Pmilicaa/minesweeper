@@ -1,9 +1,11 @@
+import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import { useAppDispatch, useAppSelector } from "./common/hooks";
 import { RootState } from "./common/store";
 import Game from "./game/Game";
-import { createGame, initialiazeGame } from "./game/gameSlice";
+import { GameDifficulty } from "./game/GameDifficulty";
+import { initialiazeGame } from "./game/gameSlice";
 
 function App() {
   const [chosenDifficulty, setChosenDifficulty] = useState(1);
@@ -14,18 +16,40 @@ function App() {
     dispatch(initialiazeGame());
   }, []);
 
-  const startGame = (difficulty: number) => {
-    dispatch(createGame(`new ${difficulty}`));
-  };
-
   return (
-    <div className="App">
-      <button onClick={() => startGame(1)}>Beginner</button>
-      <button onClick={() => startGame(2)}>Intermediate</button>
-      <button onClick={() => startGame(3)}>Hard</button>
-      <button onClick={() => startGame(4)}>Expert</button>
-      <Game gameMap={gameState.map} difficulty={chosenDifficulty} />
-    </div>
+    <Box
+      component="div"
+      sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+    >
+      <h1 style={{ fontSize: "50px" }}>MINESWEEPER 💣</h1>
+      {gameState.map.length > 0 ? (
+        <Box component="div">
+          <Box>
+            <GameDifficulty
+              setChosenDifficulty={setChosenDifficulty}
+              flex={true}
+            />
+          </Box>
+          <Game
+            gameMap={gameState.map}
+            message={gameState.message}
+            difficulty={chosenDifficulty}
+          />
+        </Box>
+      ) : (
+        <>
+          <Box textAlign="center">
+            <h2>Choose game difficulty</h2>
+          </Box>
+          <Box sx={{ paddingTop: "60px" }}>
+            <GameDifficulty
+              setChosenDifficulty={setChosenDifficulty}
+              flex={false}
+            />
+          </Box>
+        </>
+      )}
+    </Box>
   );
 }
 

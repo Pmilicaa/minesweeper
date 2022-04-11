@@ -15,7 +15,6 @@ export function createSocketChannel(socket: WebSocket) {
     socket.addEventListener("error", errorHandler);
 
     const unsubscribe = () => {
-      console.log("unsubs");
       socket.removeEventListener("message", handleOnMessage);
     };
 
