@@ -24,7 +24,7 @@ const Game = ({ gameMap, difficulty, message }: GameProps) => {
     if (message.includes("You lose")) {
       return "sad-face.png";
     } else {
-      return "smiley-face.png";
+      return "smile.png";
     }
   };
 
@@ -46,7 +46,15 @@ const Game = ({ gameMap, difficulty, message }: GameProps) => {
         <h2 style={{ color: "green" }}>🔥{message}🔥</h2>
       )}
       <Box component="div" sx={{ backgroundColor: "#C0C0C0" }}>
-        <Box component="div" sx={{ display: "flex", justifyContent: "center" }}>
+        <Box
+          component="div"
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            border: 1,
+            borderColor: "white",
+          }}
+        >
           <img
             onClick={() => startNewGame()}
             src={getImgPath(message)}
