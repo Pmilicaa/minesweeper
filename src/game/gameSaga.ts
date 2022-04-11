@@ -11,7 +11,6 @@ function* getMap(socket: WebSocket) {
 }
 
 export function* handleCreateGame(action: GameAction) {
-  console.log(action);
   yield apply(WebSocketClient.getSocket(), WebSocketClient.getSocket().send, [
     action.payload,
   ]);
@@ -24,9 +23,7 @@ export function* handleInitializeGame(): any {
   while (true) {
     try {
       const data = yield take(socketChannel);
-      console.log(data);
       if (data.includes("map:")) {
-        console.log(data);
         yield put(setMap(data));
       }
       if (data.includes("new:")) {

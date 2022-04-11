@@ -1,11 +1,9 @@
-import { Button, TableCell } from "@mui/material";
-import { Box, height, width } from "@mui/system";
+import { Box } from "@mui/system";
 import { WebSocketClient } from "../../services/socket/WebSocketClient";
 import { Coordinates } from "./cellsTypes";
 
 const Cell = ({ x, y }: Coordinates) => {
   const openCell = () => {
-    console.log("opened ", x, y);
     WebSocketClient.getSocket().send(`open ${x} ${y}`);
   };
 

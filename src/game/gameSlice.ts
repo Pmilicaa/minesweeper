@@ -7,8 +7,10 @@ const initialState: GameState = {
 };
 
 const convertMap = (payload: any): string[] => {
-  const rowList = payload.split("map:")[1].split("\n");
-  return rowList.filter((item: string[]) => !!item.length);
+  return payload
+    .split("map:")[1]
+    .split("\n")
+    .filter((row: String) => row !== "");
 };
 
 export const gameSlice = createSlice({
