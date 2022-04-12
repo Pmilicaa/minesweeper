@@ -1,7 +1,8 @@
 export interface OpenedCellValue {
   value: string;
 }
-export interface Coordinates {
+export interface CellProps {
   x: number;
   y: number;
+  onClick: (x: number, y: number) => void;
 }

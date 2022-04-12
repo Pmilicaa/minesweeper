@@ -1,16 +1,11 @@
 import { Box } from "@mui/system";
-import { WebSocketClient } from "../../services/socket/WebSocketClient";
-import { Coordinates } from "./cellsTypes";
+import { CellProps } from "./cellsTypes";
 
-const Cell = ({ x, y }: Coordinates) => {
-  const openCell = () => {
-    WebSocketClient.getSocket().send(`open ${x} ${y}`);
-  };
-
+const Cell = ({ x, y, onClick }: CellProps) => {
   return (
     <Box
       component="div"
-      onClick={() => openCell()}
+      onClick={() => onClick(x, y)}
       sx={{
         boxShadow: 3,
         display: "inline-block",
@@ -23,7 +18,7 @@ const Cell = ({ x, y }: Coordinates) => {
         borderColor: "white",
         textAlign: "center",
       }}
-    ></Box>
+    />
   );
 };
 

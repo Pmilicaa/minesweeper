@@ -7,13 +7,17 @@ import { Container } from "@mui/material";
 import OpenedCell from "./cells/OpenedCell";
 import BombCell from "./cells/BombCell";
 import { BOMB_CELL, EMPTY_CELL } from "../constants/game";
+import { WebSocketClient } from "../services/socket/WebSocketClient";
 
 const Game = ({ gameMap, difficulty, message }: GameProps) => {
   const dispatch = useAppDispatch();
+  const openCell = (x: number, y: number) => {
+    WebSocketClient.getSocket().send(`open ${x} ${y}`);
+  };
 
   const getCell = (cell: string, cellIndex: number, rowIndex: number) => {
     if (cell === EMPTY_CELL) {
-      return <Cell x={cellIndex} y={rowIndex} />;
+      return <Cell x={cellIndex} y={rowIndex} onClick={openCell} />;
     } else if (cell === BOMB_CELL) {
       return <BombCell />;
     } else {
