@@ -1,10 +1,14 @@
 import { takeLatest } from "redux-saga/effects";
-import { createGame, initialiazeGame, setMap } from "../game/gameSlice";
+import { setMap } from "../game/gameSlice";
 import { take, put, call, apply, fork } from "redux-saga/effects";
 import { WebSocketClient } from "../services/socket/WebSocketClient";
 import { editMessage } from "../game/gameSlice";
 import { GameAction } from "./gameTypes";
 import { createSocketChannel } from "../services/socket/socketService";
+import {
+  CREATE_GAME_ACTION_TYPE,
+  INITIALIAZE_GAME_ACTION_TYPE,
+} from "../constants/actions";
 
 function* getMap(socket: WebSocket) {
   yield apply(socket, socket.send, ["map"]);
@@ -41,6 +45,6 @@ export function* handleInitializeGame(): any {
 }
 
 export function* watchSaga() {
-  yield takeLatest(initialiazeGame.type, handleInitializeGame);
-  yield takeLatest(createGame.type, handleCreateGame);
+  yield takeLatest(INITIALIAZE_GAME_ACTION_TYPE, handleInitializeGame);
+  yield takeLatest(CREATE_GAME_ACTION_TYPE, handleCreateGame);
 }

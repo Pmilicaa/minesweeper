@@ -1,4 +1,8 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAction, createSlice } from "@reduxjs/toolkit";
+import {
+  CREATE_GAME_ACTION_TYPE,
+  INITIALIAZE_GAME_ACTION_TYPE,
+} from "../constants/actions";
 import { GameState } from "./gameTypes";
 
 const initialState: GameState = {
@@ -12,14 +16,13 @@ const convertMap = (payload: any): string[] => {
     .split("\n")
     .filter((row: String) => row !== "");
 };
+export const initialiazeGame = createAction(INITIALIAZE_GAME_ACTION_TYPE);
+export const createGame = createAction<string>(CREATE_GAME_ACTION_TYPE);
 
 export const gameSlice = createSlice({
   name: "game",
   initialState,
   reducers: {
-    initialiazeGame(state) {},
-    createGame(state, action) {},
-    getMap(state) {},
     setMap(state, action) {
       state.map = convertMap(action.payload);
     },
@@ -29,5 +32,4 @@ export const gameSlice = createSlice({
   },
 });
 
-export const { initialiazeGame, getMap, setMap, createGame, editMessage } =
-  gameSlice.actions;
+export const { setMap, editMessage } = gameSlice.actions;

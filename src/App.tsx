@@ -1,5 +1,5 @@
 import { Box } from "@mui/system";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import { useAppDispatch, useAppSelector } from "./common/hooks";
 import { RootState } from "./common/store";
@@ -11,7 +11,6 @@ function App() {
   const [chosenDifficulty, setChosenDifficulty] = useState(1);
   const dispatch = useAppDispatch();
   const gameState = useAppSelector((state: RootState) => state.game);
-
   useEffect(() => {
     dispatch(initialiazeGame());
   }, []);
@@ -27,7 +26,7 @@ function App() {
           <Box>
             <GameDifficulty
               setChosenDifficulty={setChosenDifficulty}
-              flex={true}
+              aligment={"HORISONTAL"}
             />
           </Box>
           <Game
@@ -44,7 +43,7 @@ function App() {
           <Box sx={{ paddingTop: "60px" }}>
             <GameDifficulty
               setChosenDifficulty={setChosenDifficulty}
-              flex={false}
+              aligment={"VERTICAL"}
             />
           </Box>
         </>

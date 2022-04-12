@@ -5,7 +5,7 @@ import { GameDifficultyType } from "./gameTypes";
 
 export const GameDifficulty = ({
   setChosenDifficulty,
-  flex,
+  aligment,
 }: GameDifficultyType) => {
   const dispatch = useAppDispatch();
   const startGame = (difficulty: number) => {
@@ -13,7 +13,12 @@ export const GameDifficulty = ({
     dispatch(createGame(`new ${difficulty}`));
   };
   return (
-    <List sx={{ fontSize: "60px", display: flex ? "flex" : "block" }}>
+    <List
+      sx={{
+        fontSize: "60px",
+        display: aligment === "HORISONTAL" ? "flex" : "block",
+      }}
+    >
       <ListItem button onClick={() => startGame(1)}>
         <ListItemText primary="Beginner" />
       </ListItem>

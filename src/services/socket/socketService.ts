@@ -7,8 +7,8 @@ export function createSocketChannel(socket: WebSocket) {
       emit(event.data);
     };
 
-    const errorHandler = (errorEvent: any) => {
-      emit(new Error(errorEvent.message || "UNKNOWN"));
+    const errorHandler = (errorEvent: unknown) => {
+      emit(new Error((errorEvent as Error).message || "UNKNOWN"));
     };
 
     socket.addEventListener("message", handleOnMessage);

@@ -6,14 +6,15 @@ import Cell from "./cells/Cell";
 import { Container } from "@mui/material";
 import OpenedCell from "./cells/OpenedCell";
 import BombCell from "./cells/BombCell";
+import { BOMB_CELL, EMPTY_CELL } from "../constants/game";
 
 const Game = ({ gameMap, difficulty, message }: GameProps) => {
   const dispatch = useAppDispatch();
 
   const getCell = (cell: string, cellIndex: number, rowIndex: number) => {
-    if (cell === "□") {
+    if (cell === EMPTY_CELL) {
       return <Cell x={cellIndex} y={rowIndex} />;
-    } else if (cell === "*") {
+    } else if (cell === BOMB_CELL) {
       return <BombCell />;
     } else {
       return <OpenedCell value={cell} />;

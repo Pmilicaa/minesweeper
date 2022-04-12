@@ -11,7 +11,8 @@ export interface GameAction {
   type: string;
   payload: string;
 }
+type AligmentGameDifficulty = "VERTICAL" | "HORISONTAL";
 export interface GameDifficultyType {
   setChosenDifficulty: Function;
-  flex: boolean;
+  aligment: AligmentGameDifficulty;
 }
