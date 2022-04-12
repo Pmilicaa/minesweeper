@@ -1,22 +1,11 @@
 import { Box } from "@mui/system";
+import { useCellStyles } from "./cellStyles";
 
 const BombCell = () => {
+  const cellStyles = useCellStyles();
   return (
-    <Box
-      component="div"
-      sx={{
-        display: "inline-block",
-        maxWidth: "25px",
-        minHeight: "25px",
-        minWidth: "25px",
-        maxHeight: "25px",
-        background: "#C0C0C0",
-        border: 1,
-        borderColor: "white",
-        textAlign: "center",
-      }}
-    >
-      <img src="bomb.svg" alt="bomb" />
+    <Box component="div" className={cellStyles.bombCell}>
+      <img src={`${process.env.REACT_APP_FILE_URL}bomb.svg`} alt="bomb" />
     </Box>
   );
 };

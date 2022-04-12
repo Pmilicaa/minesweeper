@@ -11,6 +11,7 @@ function App() {
   const [chosenDifficulty, setChosenDifficulty] = useState(1);
   const dispatch = useAppDispatch();
   const gameState = useAppSelector((state: RootState) => state.game);
+
   useEffect(() => {
     dispatch(initialiazeGame());
   }, []);
@@ -18,9 +19,14 @@ function App() {
   return (
     <Box
       component="div"
-      sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
     >
-      <h1 style={{ fontSize: "50px" }}>MINESWEEPER 💣</h1>
+      <h1 style={{ fontSize: "40px" }}>MINESWEEPER💣</h1>
       {gameState.map.length > 0 ? (
         <Box component="div">
           <Box>

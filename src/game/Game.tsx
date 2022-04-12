@@ -8,9 +8,12 @@ import OpenedCell from "./cells/OpenedCell";
 import BombCell from "./cells/BombCell";
 import { BOMB_CELL, EMPTY_CELL } from "../constants/game";
 import { WebSocketClient } from "../services/socket/WebSocketClient";
+import { useGameStyles } from "./gameStyles";
 
 const Game = ({ gameMap, difficulty, message }: GameProps) => {
   const dispatch = useAppDispatch();
+  const gameStyles = useGameStyles();
+
   const openCell = (x: number, y: number) => {
     WebSocketClient.getSocket().send(`open ${x} ${y}`);
   };
@@ -27,9 +30,9 @@ const Game = ({ gameMap, difficulty, message }: GameProps) => {
 
   const getImgPath = (message: string) => {
     if (message.includes("You lose")) {
-      return "sad-face.png";
+      return `${process.env.REACT_APP_FILE_URL}sad-face.png`;
     } else {
-      return "smile.png";
+      return `${process.env.REACT_APP_FILE_URL}smile.png`;
     }
   };
 
@@ -37,48 +40,23 @@ const Game = ({ gameMap, difficulty, message }: GameProps) => {
     dispatch(createGame(`new ${difficulty}`));
   };
   return (
-    <Container
-      sx={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        flexDirection: "column",
-      }}
-    >
+    <Container className={gameStyles.container}>
       {message !== "" && message === "You lose" ? (
         <h2 style={{ color: "red" }}> 💣{message} 💣</h2>
       ) : (
         <h2 style={{ color: "green" }}>🔥{message}🔥</h2>
       )}
       <Box component="div" sx={{ backgroundColor: "#C0C0C0" }}>
-        <Box
-          component="div"
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            border: 1,
-            borderColor: "white",
-          }}
-        >
+        <Box component="div" className={gameStyles.imageContainer}>
           <img
             onClick={() => startNewGame()}
             src={getImgPath(message)}
-            style={{
-              width: "30px",
-              background: "transparent",
-            }}
+            className={gameStyles.image}
             alt="smiley"
           />
         </Box>
         {gameMap.map((row: String, rowIndex: number) => (
-          <Box
-            component="div"
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
+          <Box component="div" className={gameStyles.cellRowContainer}>
             {row
               .split("")
               .map((cell: string, cellIndex: number) =>
