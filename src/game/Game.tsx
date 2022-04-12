@@ -2,7 +2,7 @@ import { useAppDispatch } from "../common/hooks";
 import { createGame } from "./gameSlice";
 import { GameProps } from "./gameTypes";
 import { Box } from "@mui/system";
-import Cell from "./cells/Cell";
+import { Cell } from "./cells/Cell";
 import { Container } from "@mui/material";
 import OpenedCell from "./cells/OpenedCell";
 import BombCell from "./cells/BombCell";

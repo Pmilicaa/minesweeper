@@ -26,7 +26,7 @@ function App() {
           <Box>
             <GameDifficulty
               setChosenDifficulty={setChosenDifficulty}
-              aligment={"HORISONTAL"}
+              aligment={"HORIZONTAL"}
             />
           </Box>
           <Game

@@ -16,7 +16,7 @@ export const GameDifficulty = ({
     <List
       sx={{
         fontSize: "60px",
-        display: aligment === "HORISONTAL" ? "flex" : "block",
+        display: aligment === "HORIZONTAL" ? "flex" : "block",
       }}
     >
       <ListItem button onClick={() => startGame(1)}>

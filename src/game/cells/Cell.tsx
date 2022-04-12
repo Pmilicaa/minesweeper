@@ -1,7 +1,7 @@
 import { Box } from "@mui/system";
 import { CellProps } from "./cellsTypes";
 
-const Cell = ({ x, y, onClick }: CellProps) => {
+export const Cell = ({ x, y, onClick }: CellProps) => {
   return (
     <Box
       component="div"
@@ -21,5 +21,3 @@ const Cell = ({ x, y, onClick }: CellProps) => {
     />
   );
 };
-
-export default Cell;
