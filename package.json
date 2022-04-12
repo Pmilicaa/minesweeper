@@ -2,7 +2,7 @@
   "name": "minesweeper",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://Pmilicaa.github.io/minesweeper",
+  "homepage": "https://pmilicaa.github.io/minesweeper",
   "dependencies": {
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",

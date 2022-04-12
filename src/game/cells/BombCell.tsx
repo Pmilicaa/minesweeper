@@ -16,7 +16,7 @@ const BombCell = () => {
         textAlign: "center",
       }}
     >
-      <img src="http://localhost:3000/bomb.svg" alt="bomb" />
+      <img src="bomb.svg" alt="bomb" />
     </Box>
   );
 };
