@@ -5,12 +5,20 @@ import { useAppDispatch, useAppSelector } from "./common/hooks";
 import { RootState } from "./common/store";
 import Game from "./game/Game";
 import { GameDifficulty } from "./game/GameDifficulty";
-import { createGame, initialiazeGame, setDifficulty } from "./game/gameSlice";
+import {
+  clearAllFlags,
+  createGame,
+  editMessage,
+  initialiazeGame,
+  setDifficulty,
+} from "./game/gameSlice";
 
 function App() {
   const dispatch = useAppDispatch();
   const gameState = useAppSelector((state: RootState) => state.game);
   const startGame = (difficulty: number) => {
+    dispatch(clearAllFlags());
+    dispatch(editMessage("You can do it"));
     dispatch(setDifficulty(difficulty));
     dispatch(createGame(`new ${difficulty}`));
   };

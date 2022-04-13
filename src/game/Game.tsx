@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from "../common/hooks";
-import { createGame } from "./gameSlice";
+import { clearAllFlags, createGame, editMessage } from "./gameSlice";
 import { GameProps } from "./gameTypes";
 import { Box } from "@mui/system";
 import { Cell } from "./cells/Cell";
@@ -15,9 +15,20 @@ const Game = ({ message }: GameProps) => {
   const dispatch = useAppDispatch();
   const gameStyles = useGameStyles();
   const gameState = useAppSelector((state: RootState) => state.game);
-
   const openCell = (x: number, y: number) => {
     WebSocketClient.getSocket().send(`open ${x} ${y}`);
+  };
+
+  const isFlagged = (x: number, y: number): boolean => {
+    const found = gameState.flags.filter(
+      (flag) => flag.x === x && flag.y === y
+    );
+    found.map((found) => console.log(found));
+    if (found.length === 1) {
+      return true;
+    } else {
+      return false;
+    }
   };
 
   const getCell = (cell: string, cellIndex: number, rowIndex: number) => {
@@ -28,6 +39,7 @@ const Game = ({ message }: GameProps) => {
           x={cellIndex}
           y={rowIndex}
           onClick={openCell}
+          isFlagged={isFlagged(cellIndex, rowIndex)}
         />
       );
     } else if (cell === BOMB_CELL) {
@@ -46,11 +58,16 @@ const Game = ({ message }: GameProps) => {
   };
 
   const startNewGame = () => {
+    dispatch(clearAllFlags());
+    dispatch(editMessage("You can do it"));
     dispatch(createGame(`new ${gameState.difficulty}`));
   };
+
   return (
     <Container className={gameStyles.container}>
-      {message !== "" && message === "You lose" ? (
+      {message === "" ? (
+        <h2 style={{ color: "green" }}>🔥{(message = "You can do it")}🔥</h2>
+      ) : message === "You lose" ? (
         <h2 style={{ color: "red" }}> 💣{message} 💣</h2>
       ) : (
         <h2 style={{ color: "green" }}>🔥{message}🔥</h2>

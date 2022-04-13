@@ -4,5 +4,7 @@ export interface OpenedCellValue {
 export interface CellProps {
   x: number;
   y: number;
-  onClick: (x: number, y: number) => void;
+  onClick: Function;
+  isFlagged: boolean;
+  //(x: number, y: number) => void
 }

@@ -3,12 +3,22 @@ import {
   CREATE_GAME_ACTION_TYPE,
   INITIALIAZE_GAME_ACTION_TYPE,
 } from "../constants/actions";
-import { GameState } from "./gameTypes";
+import { Flag, GameState } from "./gameTypes";
 
 const initialState: GameState = {
   map: [],
   message: "",
   difficulty: 0,
+  flags: [],
+};
+
+const removeFlagFromState = (flags: Flag[], payload: Flag) => {
+  for (let index = 0; index < flags.length; index++) {
+    const flag = flags[index];
+    if (flag.x === payload.x && flag.y === payload.y) {
+      flags.splice(index, 1);
+    }
+  }
 };
 
 const convertMap = (payload: any): string[] => {
@@ -30,10 +40,26 @@ export const gameSlice = createSlice({
     editMessage(state, action) {
       state.message = action.payload;
     },
+    addFlag(state, action) {
+      state.flags.push(action.payload);
+    },
+    removeFlag(state, action) {
+      removeFlagFromState(state.flags, action.payload);
+    },
+    clearAllFlags(state) {
+      state.flags = [];
+    },
     setDifficulty(state, action) {
       state.difficulty = action.payload;
     },
   },
 });
 
-export const { setMap, editMessage, setDifficulty } = gameSlice.actions;
+export const {
+  setMap,
+  editMessage,
+  addFlag,
+  removeFlag,
+  clearAllFlags,
+  setDifficulty,
+} = gameSlice.actions;
