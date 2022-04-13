@@ -8,7 +8,7 @@ import { GameState } from "./gameTypes";
 const initialState: GameState = {
   map: [],
   message: "",
-  difficulty: 1,
+  difficulty: 0,
 };
 
 const convertMap = (payload: any): string[] => {

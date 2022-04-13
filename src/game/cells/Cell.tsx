@@ -8,6 +8,8 @@ export const Cell = ({ x, y, onClick }: CellProps) => {
   return (
     <Box
       component="div"
+      data-testid="cell-component"
+      role="button"
       onClick={() => onClick(x, y)}
       className={cellStyles.cell}
     />

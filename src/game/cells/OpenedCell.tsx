@@ -21,6 +21,7 @@ const OpenedCell = ({ value }: OpenedCellValue) => {
     <Box
       component="div"
       onClick={() => getFontColor(value)}
+      data-testid="opened-cell-component"
       sx={{
         color: getFontColor(value),
       }}

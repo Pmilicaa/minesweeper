@@ -5,12 +5,15 @@ import { useAppDispatch, useAppSelector } from "./common/hooks";
 import { RootState } from "./common/store";
 import Game from "./game/Game";
 import { GameDifficulty } from "./game/GameDifficulty";
-import { initialiazeGame } from "./game/gameSlice";
+import { createGame, initialiazeGame, setDifficulty } from "./game/gameSlice";
 
 function App() {
   const dispatch = useAppDispatch();
   const gameState = useAppSelector((state: RootState) => state.game);
-
+  const startGame = (difficulty: number) => {
+    dispatch(setDifficulty(difficulty));
+    dispatch(createGame(`new ${difficulty}`));
+  };
   useEffect(() => {
     dispatch(initialiazeGame());
   }, []);
@@ -18,6 +21,7 @@ function App() {
   return (
     <Box
       component="div"
+      data-testid="app-component"
       sx={{
         display: "flex",
         flexDirection: "column",
@@ -25,13 +29,15 @@ function App() {
         justifyContent: "center",
       }}
     >
-      <h1 style={{ fontSize: "40px" }}>MINESWEEPER💣</h1>
-      {gameState.map.length > 0 ? (
+      <h1 style={{ fontSize: "40px" }} data-testid="heading-minesweeper">
+        MINESWEEPER💣
+      </h1>
+      {gameState.difficulty > 0 ? (
         <Box component="div">
           <Box>
-            <GameDifficulty aligment={"HORIZONTAL"} />
+            <GameDifficulty aligment={"HORIZONTAL"} startGame={startGame} />
           </Box>
-          <Game gameMap={gameState.map} message={gameState.message} />
+          <Game data-testid="game-component" message={gameState.message} />
         </Box>
       ) : (
         <>
@@ -39,7 +45,7 @@ function App() {
             <h2>Choose game difficulty</h2>
           </Box>
           <Box sx={{ paddingTop: "60px" }}>
-            <GameDifficulty aligment={"VERTICAL"} />
+            <GameDifficulty aligment={"VERTICAL"} startGame={startGame} />
           </Box>
         </>
       )}

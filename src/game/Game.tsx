@@ -11,12 +11,10 @@ import { WebSocketClient } from "../services/socket/WebSocketClient";
 import { useGameStyles } from "./gameStyles";
 import { RootState } from "../common/store";
 
-const Game = ({ gameMap, message }: GameProps) => {
+const Game = ({ message }: GameProps) => {
   const dispatch = useAppDispatch();
   const gameStyles = useGameStyles();
-  const difficulty = useAppSelector(
-    (state: RootState) => state.game.difficulty
-  );
+  const gameState = useAppSelector((state: RootState) => state.game);
 
   const openCell = (x: number, y: number) => {
     WebSocketClient.getSocket().send(`open ${x} ${y}`);
@@ -24,11 +22,18 @@ const Game = ({ gameMap, message }: GameProps) => {
 
   const getCell = (cell: string, cellIndex: number, rowIndex: number) => {
     if (cell === EMPTY_CELL) {
-      return <Cell x={cellIndex} y={rowIndex} onClick={openCell} />;
+      return (
+        <Cell
+          key={`${-cellIndex} - ${rowIndex}`}
+          x={cellIndex}
+          y={rowIndex}
+          onClick={openCell}
+        />
+      );
     } else if (cell === BOMB_CELL) {
-      return <BombCell />;
+      return <BombCell key={`${-cellIndex} - ${rowIndex}`} />;
     } else {
-      return <OpenedCell value={cell} />;
+      return <OpenedCell key={`${-cellIndex} - ${rowIndex}`} value={cell} />;
     }
   };
 
@@ -41,7 +46,7 @@ const Game = ({ gameMap, message }: GameProps) => {
   };
 
   const startNewGame = () => {
-    dispatch(createGame(`new ${difficulty}`));
+    dispatch(createGame(`new ${gameState.difficulty}`));
   };
   return (
     <Container className={gameStyles.container}>
@@ -59,8 +64,12 @@ const Game = ({ gameMap, message }: GameProps) => {
             alt="smiley"
           />
         </Box>
-        {gameMap.map((row: String, rowIndex: number) => (
-          <Box component="div" className={gameStyles.cellRowContainer}>
+        {gameState.map.map((row: String, rowIndex: number) => (
+          <Box
+            component="div"
+            key={rowIndex}
+            className={gameStyles.cellRowContainer}
+          >
             {row
               .split("")
               .map((cell: string, cellIndex: number) =>

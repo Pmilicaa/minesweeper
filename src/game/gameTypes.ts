@@ -4,7 +4,6 @@ export interface GameState {
   difficulty: number;
 }
 export interface GameProps {
-  gameMap: string[];
   message: string;
 }
 export interface GameAction {
@@ -14,4 +13,5 @@ export interface GameAction {
 type AligmentGameDifficulty = "VERTICAL" | "HORIZONTAL";
 export interface GameDifficultyType {
   aligment: AligmentGameDifficulty;
+  startGame: Function;
 }
