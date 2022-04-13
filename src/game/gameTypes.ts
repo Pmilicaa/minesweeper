@@ -1,10 +1,10 @@
 export interface GameState {
   map: string[];
   message: string;
+  difficulty: number;
 }
 export interface GameProps {
   gameMap: string[];
-  difficulty: number;
   message: string;
 }
 export interface GameAction {
@@ -13,6 +13,5 @@ export interface GameAction {
 }
 type AligmentGameDifficulty = "VERTICAL" | "HORIZONTAL";
 export interface GameDifficultyType {
-  setChosenDifficulty: Function;
   aligment: AligmentGameDifficulty;
 }

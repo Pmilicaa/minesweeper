@@ -1,15 +1,12 @@
 import { List, ListItem, ListItemText } from "@mui/material";
 import { useAppDispatch } from "../common/hooks";
-import { createGame } from "./gameSlice";
+import { createGame, setDifficulty } from "./gameSlice";
 import { GameDifficultyType } from "./gameTypes";
 
-export const GameDifficulty = ({
-  setChosenDifficulty,
-  aligment,
-}: GameDifficultyType) => {
+export const GameDifficulty = ({ aligment }: GameDifficultyType) => {
   const dispatch = useAppDispatch();
   const startGame = (difficulty: number) => {
-    setChosenDifficulty(difficulty);
+    dispatch(setDifficulty(difficulty));
     dispatch(createGame(`new ${difficulty}`));
   };
   return (

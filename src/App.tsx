@@ -1,5 +1,5 @@
 import { Box } from "@mui/system";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import "./App.css";
 import { useAppDispatch, useAppSelector } from "./common/hooks";
 import { RootState } from "./common/store";
@@ -8,7 +8,6 @@ import { GameDifficulty } from "./game/GameDifficulty";
 import { initialiazeGame } from "./game/gameSlice";
 
 function App() {
-  const [chosenDifficulty, setChosenDifficulty] = useState(1);
   const dispatch = useAppDispatch();
   const gameState = useAppSelector((state: RootState) => state.game);
 
@@ -30,16 +29,9 @@ function App() {
       {gameState.map.length > 0 ? (
         <Box component="div">
           <Box>
-            <GameDifficulty
-              setChosenDifficulty={setChosenDifficulty}
-              aligment={"HORIZONTAL"}
-            />
+            <GameDifficulty aligment={"HORIZONTAL"} />
           </Box>
-          <Game
-            gameMap={gameState.map}
-            message={gameState.message}
-            difficulty={chosenDifficulty}
-          />
+          <Game gameMap={gameState.map} message={gameState.message} />
         </Box>
       ) : (
         <>
@@ -47,10 +39,7 @@ function App() {
             <h2>Choose game difficulty</h2>
           </Box>
           <Box sx={{ paddingTop: "60px" }}>
-            <GameDifficulty
-              setChosenDifficulty={setChosenDifficulty}
-              aligment={"VERTICAL"}
-            />
+            <GameDifficulty aligment={"VERTICAL"} />
           </Box>
         </>
       )}

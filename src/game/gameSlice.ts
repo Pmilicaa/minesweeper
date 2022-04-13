@@ -8,6 +8,7 @@ import { GameState } from "./gameTypes";
 const initialState: GameState = {
   map: [],
   message: "",
+  difficulty: 1,
 };
 
 const convertMap = (payload: any): string[] => {
@@ -29,7 +30,10 @@ export const gameSlice = createSlice({
     editMessage(state, action) {
       state.message = action.payload;
     },
+    setDifficulty(state, action) {
+      state.difficulty = action.payload;
+    },
   },
 });
 
-export const { setMap, editMessage } = gameSlice.actions;
+export const { setMap, editMessage, setDifficulty } = gameSlice.actions;

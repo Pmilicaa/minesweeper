@@ -1,4 +1,4 @@
-import { useAppDispatch } from "../common/hooks";
+import { useAppDispatch, useAppSelector } from "../common/hooks";
 import { createGame } from "./gameSlice";
 import { GameProps } from "./gameTypes";
 import { Box } from "@mui/system";
@@ -9,10 +9,14 @@ import BombCell from "./cells/BombCell";
 import { BOMB_CELL, EMPTY_CELL } from "../constants/game";
 import { WebSocketClient } from "../services/socket/WebSocketClient";
 import { useGameStyles } from "./gameStyles";
+import { RootState } from "../common/store";
 
-const Game = ({ gameMap, difficulty, message }: GameProps) => {
+const Game = ({ gameMap, message }: GameProps) => {
   const dispatch = useAppDispatch();
   const gameStyles = useGameStyles();
+  const difficulty = useAppSelector(
+    (state: RootState) => state.game.difficulty
+  );
 
   const openCell = (x: number, y: number) => {
     WebSocketClient.getSocket().send(`open ${x} ${y}`);
