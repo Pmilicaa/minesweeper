@@ -11,7 +11,7 @@ export const Cell = ({ x, y, onClick, isFlagged }: CellProps) => {
   const gameMessage = useAppSelector((state: RootState) => state.game.message);
 
   const cellStyles = useCellStyles();
-  const handleLeftAndRightClick = (e: Event) => {
+  const handleLeftAndRightClick = (e: MouseEvent): void => {
     if (e.type === "click") {
       if (!isFlagged) {
         onClick(x, y);
@@ -33,8 +33,8 @@ export const Cell = ({ x, y, onClick, isFlagged }: CellProps) => {
       component="div"
       data-testid="cell-component"
       role="button"
-      onClick={(e: any) => handleLeftAndRightClick(e)}
-      onContextMenu={(e: any) => handleLeftAndRightClick(e)}
+      onClick={(e: any) => handleLeftAndRightClick(e as MouseEvent)}
+      onContextMenu={(e: any) => handleLeftAndRightClick(e as MouseEvent)}
       className={cellStyles.cell}
     >
       {isFlagged && (

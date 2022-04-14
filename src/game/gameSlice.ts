@@ -21,7 +21,7 @@ const removeFlagFromState = (flags: Flag[], payload: Flag) => {
   }
 };
 
-const convertMap = (payload: any): string[] => {
+const convertMap = (payload: string): string[] => {
   return payload
     .split("map:")[1]
     .split("\n")
