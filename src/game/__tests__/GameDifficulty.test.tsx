@@ -16,7 +16,7 @@ describe("game difficulty test", () => {
     );
     expect(screen.getAllByRole("menuitem")).toHaveLength(4);
   });
-  it("renders difficulty  beginer menu item", () => {
+  it("renders difficulty beginner menu item", () => {
     render(
       <GameDifficulty aligment="HORIZONTAL" startGame={mockOnStartGame} />
     );
@@ -60,14 +60,14 @@ describe("game difficulty test", () => {
     expertMenuItem.click();
     expect(mockOnStartGame).toHaveBeenCalledWith(4);
   });
-  it("renders game difficulty  is having style display flex", () => {
+  it("renders game difficulty that has style display flex", () => {
     render(
       <GameDifficulty aligment="HORIZONTAL" startGame={mockOnStartGame} />
     );
     const element: any = screen.getByTestId("game-difficulty-component");
     expect(element).toHaveStyle("display:flex");
   });
-  it("renders game difficulty is having style display block", () => {
+  it("renders game difficulty that has style display block", () => {
     render(<GameDifficulty aligment="VERTICAL" startGame={mockOnStartGame} />);
     const element: any = screen.getByTestId("game-difficulty-component");
     expect(element).toHaveStyle("display:block");

@@ -39,6 +39,7 @@ export const Cell = ({ x, y, onClick, isFlagged }: CellProps) => {
     >
       {isFlagged && (
         <img
+          data-testid="flag-img"
           style={{ width: "25px" }}
           src={`${process.env.REACT_APP_FILE_URL}flag.png`}
           alt="flag"

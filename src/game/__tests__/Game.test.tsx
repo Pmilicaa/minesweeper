@@ -3,6 +3,7 @@ import { Provider } from "react-redux";
 import configureStore from "redux-mock-store";
 import { OK } from "../../constants/game";
 import BombCell from "../cells/BombCell";
+import { Cell } from "../cells/Cell";
 import OpenedCell from "../cells/OpenedCell";
 
 import Game from "../Game";
@@ -11,12 +12,13 @@ const middlewares: any = [];
 const mockStore = configureStore(middlewares);
 
 describe("game component test", () => {
-  it("returns map", () => {
+  it("game table contains all cells", () => {
     const initialState = {
       game: {
         map: ["□□□", "□□□", "□□□"],
         message: OK,
         difficulty: 1,
+        flags: [],
       },
     };
     const store = mockStore(initialState);
@@ -28,12 +30,13 @@ describe("game component test", () => {
     );
     expect(screen.getAllByTestId("cell-component")).toHaveLength(9);
   });
-  it("returns a bomb cell", () => {
+  it("game table contains a bomb cell", () => {
     const initialState = {
       game: {
         map: ["□□□", "□*□", "□□□"],
         message: OK,
         difficulty: 1,
+        flags: [],
       },
     };
     const store = mockStore(initialState);
@@ -44,12 +47,13 @@ describe("game component test", () => {
     );
     expect(screen.getByTestId("bomb-cell-component")).toBeInTheDocument();
   });
-  it("returns a opened cell", () => {
+  it("game table contains an opened cell", () => {
     const initialState = {
       game: {
         map: ["□□□", "□1□", "□□□"],
         message: OK,
         difficulty: 1,
+        flags: [],
       },
     };
     const store = mockStore(initialState);
@@ -59,5 +63,23 @@ describe("game component test", () => {
       </Provider>
     );
     expect(screen.getByTestId("opened-cell-component")).toBeInTheDocument();
+  });
+  it("game table contains a flagged cell", () => {
+    const initialState = {
+      game: {
+        map: ["□□□", "□□□", "□□□"],
+        message: OK,
+        difficulty: 1,
+        flags: [{ x: 0, y: 0 }],
+      },
+    };
+    const store = mockStore(initialState);
+    const mockOnClick = jest.fn();
+    const { container } = render(
+      <Provider store={store}>
+        <Cell x={0} y={0} onClick={mockOnClick} isFlagged={true} />
+      </Provider>
+    );
+    expect(container).toBeInTheDocument();
   });
 });

@@ -3,7 +3,6 @@ import { Provider } from "react-redux";
 import configureStore from "redux-mock-store";
 import App from "../App";
 import { OK } from "../constants/game";
-import Game from "../game/Game";
 
 const middlewares: any = [];
 const mockStore = configureStore(middlewares);
@@ -15,6 +14,7 @@ describe("app component test", () => {
         map: ["□□□", "□□□", "□□□"],
         message: OK,
         difficulty: 1,
+        flags: [],
       },
     };
     const store = mockStore(initialState);
@@ -33,6 +33,7 @@ describe("app component test", () => {
         map: ["□□□", "□□□", "□□□"],
         message: OK,
         difficulty: 1,
+        flags: [],
       },
     };
     const store = mockStore(initialState);

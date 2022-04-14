@@ -100,9 +100,9 @@ const Game = ({ message }: GameProps) => {
           </Box>
         ))}
       </Box>
-      <h4 style={{ color: "green" }}>
-        Start new game by clicking on smiley face
-      </h4>
+      <p style={{ color: "green" }}>
+        start new game by clicking on smiley face
+      </p>
     </Container>
   );
 };
