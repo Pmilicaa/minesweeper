@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import "./App.css";
 import { useAppDispatch, useAppSelector } from "./common/hooks";
 import { RootState } from "./common/store";
+import { YOU_CAN_DO_IT } from "./constants/game";
 import Game from "./game/Game";
 import { GameDifficulty } from "./game/GameDifficulty";
 import {
@@ -18,7 +19,7 @@ function App() {
   const gameState = useAppSelector((state: RootState) => state.game);
   const startGame = (difficulty: number) => {
     dispatch(clearAllFlags());
-    dispatch(editMessage("You can do it"));
+    dispatch(editMessage(YOU_CAN_DO_IT));
     dispatch(setDifficulty(difficulty));
     dispatch(createGame(`new ${difficulty}`));
   };

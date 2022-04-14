@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { Provider } from "react-redux";
 import configureStore from "redux-mock-store";
+import { OK } from "../../constants/game";
 import BombCell from "../cells/BombCell";
 import OpenedCell from "../cells/OpenedCell";
 
@@ -14,7 +15,7 @@ describe("game component test", () => {
     const initialState = {
       game: {
         map: ["□□□", "□□□", "□□□"],
-        message: "OK",
+        message: OK,
         difficulty: 1,
       },
     };
@@ -22,7 +23,7 @@ describe("game component test", () => {
 
     render(
       <Provider store={store}>
-        <Game message="OK" />
+        <Game message={OK} />
       </Provider>
     );
     expect(screen.getAllByTestId("cell-component")).toHaveLength(9);
@@ -31,7 +32,7 @@ describe("game component test", () => {
     const initialState = {
       game: {
         map: ["□□□", "□*□", "□□□"],
-        message: "OK",
+        message: OK,
         difficulty: 1,
       },
     };
@@ -47,7 +48,7 @@ describe("game component test", () => {
     const initialState = {
       game: {
         map: ["□□□", "□1□", "□□□"],
-        message: "OK",
+        message: OK,
         difficulty: 1,
       },
     };

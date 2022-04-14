@@ -2,6 +2,7 @@ import { render, screen } from "@testing-library/react";
 import { Provider } from "react-redux";
 import configureStore from "redux-mock-store";
 import App from "../App";
+import { OK } from "../constants/game";
 import Game from "../game/Game";
 
 const middlewares: any = [];
@@ -12,7 +13,7 @@ describe("app component test", () => {
     const initialState = {
       game: {
         map: ["□□□", "□□□", "□□□"],
-        message: "OK",
+        message: OK,
         difficulty: 1,
       },
     };
@@ -30,7 +31,7 @@ describe("app component test", () => {
     const initialState = {
       game: {
         map: ["□□□", "□□□", "□□□"],
-        message: "OK",
+        message: OK,
         difficulty: 1,
       },
     };

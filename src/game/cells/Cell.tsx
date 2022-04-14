@@ -1,6 +1,7 @@
 import { Box } from "@mui/system";
 import { useAppDispatch, useAppSelector } from "../../common/hooks";
 import { RootState } from "../../common/store";
+import { YOU_LOSE } from "../../constants/game";
 import { addFlag, removeFlag } from "../gameSlice";
 import { useCellStyles } from "./cellStyles";
 import { CellProps } from "./cellsTypes";
@@ -20,7 +21,7 @@ export const Cell = ({ x, y, onClick, isFlagged }: CellProps) => {
       if (isFlagged) {
         dispatch(removeFlag({ x: x, y: y }));
       } else {
-        if (gameMessage !== "You lose") {
+        if (gameMessage !== YOU_LOSE) {
           dispatch(addFlag({ x: x, y: y }));
         }
       }

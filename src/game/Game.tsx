@@ -6,7 +6,12 @@ import { Cell } from "./cells/Cell";
 import { Container } from "@mui/material";
 import OpenedCell from "./cells/OpenedCell";
 import BombCell from "./cells/BombCell";
-import { BOMB_CELL, EMPTY_CELL } from "../constants/game";
+import {
+  BOMB_CELL,
+  EMPTY_CELL,
+  YOU_CAN_DO_IT,
+  YOU_LOSE,
+} from "../constants/game";
 import { WebSocketClient } from "../services/socket/WebSocketClient";
 import { useGameStyles } from "./gameStyles";
 import { RootState } from "../common/store";
@@ -50,7 +55,7 @@ const Game = ({ message }: GameProps) => {
   };
 
   const getImgPath = (message: string) => {
-    if (message.includes("You lose")) {
+    if (message.includes(YOU_LOSE)) {
       return `${process.env.REACT_APP_FILE_URL}sad-face.png`;
     } else {
       return `${process.env.REACT_APP_FILE_URL}smile.png`;
@@ -59,15 +64,15 @@ const Game = ({ message }: GameProps) => {
 
   const startNewGame = () => {
     dispatch(clearAllFlags());
-    dispatch(editMessage("You can do it"));
+    dispatch(editMessage(YOU_CAN_DO_IT));
     dispatch(createGame(`new ${gameState.difficulty}`));
   };
 
   return (
     <Container className={gameStyles.container}>
       {message === "" ? (
-        <h2 style={{ color: "green" }}>🔥{(message = "You can do it")}🔥</h2>
-      ) : message === "You lose" ? (
+        <h2 style={{ color: "green" }}>🔥{(message = YOU_CAN_DO_IT)}🔥</h2>
+      ) : message === YOU_LOSE ? (
         <h2 style={{ color: "red" }}> 💣{message} 💣</h2>
       ) : (
         <h2 style={{ color: "green" }}>🔥{message}🔥</h2>
@@ -95,6 +100,9 @@ const Game = ({ message }: GameProps) => {
           </Box>
         ))}
       </Box>
+      <h4 style={{ color: "green" }}>
+        Start new game by clicking on smiley face
+      </h4>
     </Container>
   );
 };
