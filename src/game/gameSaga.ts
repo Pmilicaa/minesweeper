@@ -21,7 +21,7 @@ export function* handleCreateGame(action: GameAction) {
 }
 
 export function* handleInitializeGame(): any {
-  const socket: any = yield call(WebSocketClient.createConnection);
+  const socket = yield call(WebSocketClient.createConnection);
   const socketChannel = yield call(createSocketChannel, socket);
 
   while (true) {

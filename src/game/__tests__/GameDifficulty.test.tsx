@@ -64,12 +64,12 @@ describe("game difficulty test", () => {
     render(
       <GameDifficulty aligment="HORIZONTAL" startGame={mockOnStartGame} />
     );
-    const element: any = screen.getByTestId("game-difficulty-component");
+    const element = screen.getByTestId("game-difficulty-component");
     expect(element).toHaveStyle("display:flex");
   });
   it("renders game difficulty that has style display block", () => {
     render(<GameDifficulty aligment="VERTICAL" startGame={mockOnStartGame} />);
-    const element: any = screen.getByTestId("game-difficulty-component");
+    const element = screen.getByTestId("game-difficulty-component");
     expect(element).toHaveStyle("display:block");
   });
 });

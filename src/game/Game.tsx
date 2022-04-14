@@ -28,7 +28,6 @@ const Game = ({ message }: GameProps) => {
     const found = gameState.flags.filter(
       (flag) => flag.x === x && flag.y === y
     );
-    found.map((found) => console.log(found));
     if (found.length === 1) {
       return true;
     } else {

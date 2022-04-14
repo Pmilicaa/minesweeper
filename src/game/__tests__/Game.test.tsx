@@ -2,14 +2,9 @@ import { render, screen } from "@testing-library/react";
 import { Provider } from "react-redux";
 import configureStore from "redux-mock-store";
 import { OK } from "../../constants/game";
-import BombCell from "../cells/BombCell";
-import { Cell } from "../cells/Cell";
-import OpenedCell from "../cells/OpenedCell";
-
 import Game from "../Game";
 
-const middlewares: any = [];
-const mockStore = configureStore(middlewares);
+const mockStore = configureStore();
 
 describe("game component test", () => {
   it("game table contains all cells", () => {
@@ -42,7 +37,7 @@ describe("game component test", () => {
     const store = mockStore(initialState);
     render(
       <Provider store={store}>
-        <BombCell />
+        <Game message={OK} />
       </Provider>
     );
     expect(screen.getByTestId("bomb-cell-component")).toBeInTheDocument();
@@ -59,7 +54,7 @@ describe("game component test", () => {
     const store = mockStore(initialState);
     render(
       <Provider store={store}>
-        <OpenedCell value={"1"} />
+        <Game message={OK} />
       </Provider>
     );
     expect(screen.getByTestId("opened-cell-component")).toBeInTheDocument();
@@ -74,12 +69,11 @@ describe("game component test", () => {
       },
     };
     const store = mockStore(initialState);
-    const mockOnClick = jest.fn();
-    const { container } = render(
+    render(
       <Provider store={store}>
-        <Cell x={0} y={0} onClick={mockOnClick} isFlagged={true} />
+        <Game message={OK} />
       </Provider>
     );
-    expect(container).toBeInTheDocument();
+    expect(screen.getByTestId("flag-img")).toBeInTheDocument();
   });
 });

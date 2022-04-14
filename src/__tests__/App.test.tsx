@@ -4,8 +4,7 @@ import configureStore from "redux-mock-store";
 import App from "../App";
 import { OK } from "../constants/game";
 
-const middlewares: any = [];
-const mockStore = configureStore(middlewares);
+const mockStore = configureStore();
 
 describe("app component test", () => {
   it("returns app component", () => {
