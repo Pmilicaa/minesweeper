@@ -1,11 +1,13 @@
 import { Box } from "@mui/system";
-import { useAppDispatch } from "../../common/hooks";
+import { useAppDispatch, useAppSelector } from "../../common/hooks";
+import { RootState } from "../../common/store";
 import { addFlag, removeFlag } from "../gameSlice";
 import { useCellStyles } from "./cellStyles";
 import { CellProps } from "./cellsTypes";
 
 export const Cell = ({ x, y, onClick, isFlagged }: CellProps) => {
   const dispatch = useAppDispatch();
+  const gameMessage = useAppSelector((state: RootState) => state.game.message);
 
   const cellStyles = useCellStyles();
   const handleLeftAndRightClick = (e: Event) => {
@@ -18,7 +20,9 @@ export const Cell = ({ x, y, onClick, isFlagged }: CellProps) => {
       if (isFlagged) {
         dispatch(removeFlag({ x: x, y: y }));
       } else {
-        dispatch(addFlag({ x: x, y: y }));
+        if (gameMessage !== "You lose") {
+          dispatch(addFlag({ x: x, y: y }));
+        }
       }
     }
   };

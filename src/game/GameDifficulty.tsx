@@ -1,7 +1,25 @@
 import { List, ListItem, ListItemText } from "@mui/material";
 import { GameDifficultyType } from "./gameTypes";
 
+const difficulties = [
+  { type: "Beginner", level: 1 },
+  { type: "Intermediate", level: 2 },
+  { type: "Hard", level: 3 },
+  { type: "Expert", level: 4 },
+];
 export const GameDifficulty = ({ aligment, startGame }: GameDifficultyType) => {
+  const getDifficulties = difficulties.map((difficulty, index) => {
+    return (
+      <ListItem
+        role="menuitem"
+        button
+        onClick={() => startGame(difficulty.level)}
+        key={index}
+      >
+        <ListItemText primary={difficulty.type} />
+      </ListItem>
+    );
+  });
   return (
     <List
       role="menu"
@@ -11,18 +29,7 @@ export const GameDifficulty = ({ aligment, startGame }: GameDifficultyType) => {
       }}
       data-testid="game-difficulty-component"
     >
-      <ListItem role="menuitem" button onClick={() => startGame(1)}>
-        <ListItemText primary="Beginner" />
-      </ListItem>
-      <ListItem role="menuitem" button onClick={() => startGame(2)}>
-        <ListItemText primary="Intermediate" />
-      </ListItem>
-      <ListItem role="menuitem" button onClick={() => startGame(3)}>
-        <ListItemText primary="Hard" />
-      </ListItem>
-      <ListItem role="menuitem" button onClick={() => startGame(4)}>
-        <ListItemText primary="Expert" />
-      </ListItem>
+      {getDifficulties}
     </List>
   );
 };
